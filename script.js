@@ -1,14 +1,17 @@
 /*
- IMPULSA LOCAL · JavaScript de iniciación.
- 1) Cambia los enlaces personales en CONFIG.
- 2) Personaliza las estrategias en NEGOCIOS.
- 3) No hay servidor ni base de datos: los formularios se procesan en este dispositivo.
+ Emprendimientos del Barrio Armenia.
+ Los datos de las fichas se guardan solo en este navegador.
+ CONFIG.CASOS_AUTORIZADOS contiene únicamente casos reales cuya publicación se autorizó.
 */
 "use strict";
 
 const CONFIG = {
-  LINKEDIN_URL: "https://www.linkedin.com/in/omar-dario-orjuela-lopez-131b28148/", // Ejemplo válido: https://www.linkedin.com/in/TU-PERFIL/ (sustituir)
-  VIDEO_YOUTUBE_URL: "" // Pega aquí la URL real del video después de grabarlo.
+  VIDEO_YOUTUBE_URL: "",
+  NOMBRE_COMUNIDAD: "Comerciantes del barrio Armenia",
+  FECHA_TALLER: "", // Completar únicamente con la fecha real confirmada (AAAA-MM-DD).
+  // No incluir nombres, fotos, diagnósticos ni resultados sin autorización.
+  // Campos de un caso: { nombre, reto, clientes, idea, autorizado: true }.
+  CASOS_AUTORIZADOS: []
 };
 
 const NEGOCIOS = {
@@ -39,31 +42,46 @@ const NEGOCIOS = {
     channels: "Estados de WhatsApp, Instagram y referencias de ubicación actualizadas; verifica elegibilidad antes de crear un perfil en Google"
   },
   barberia: {
-    label: "Fred Authentic", category: "BARBERÍA LOCAL · CASO DE ESTUDIO", icon: "✂️", css: "business-barberia",
-    title: "Fred Authentic: conviértete en la primera opción de tu zona.",
+    label: "Barbería del barrio", category: "BARBERÍA LOCAL · EJEMPLO EDUCATIVO", icon: "✂️", css: "business-barberia",
+    title: "Barbería del barrio: conviértete en la primera opción de tu zona.",
     problem: "La calidad del corte debe verse también en internet. Los clientes necesitan confianza, precios claros y una manera fácil de reservar.",
     value: "Demuestra tu técnica con trabajos reales, testimonios autorizados y disponibilidad de citas.",
     audience: "Personas de la zona que valoran técnica, puntualidad y buena atención.",
     ideas: ["Antes y después de un corte (con autorización)", "Video del proceso de un degradado o diseño", "Publicación de servicios, horarios y reservas"],
-    message: "✂️ En Fred Authentic queremos que tu próximo corte sea fácil de reservar. Escríbenos para consultar servicios, precios y horarios disponibles.",
+    message: "✂️ En Barbería del barrio queremos que tu próximo corte sea fácil de reservar. Escríbenos para consultar servicios, precios y horarios disponibles.",
     metric: "Citas nuevas, asistencia y clientes que regresan",
     weeks: ["Presenta al equipo, el local y servicios", "Publica un antes y después autorizado", "Comparte un consejo útil de cuidado capilar", "Muestra horarios y solicita reseñas honestas"],
     quick: "Graba un corte real en vertical y añade al final una invitación clara para consultar citas.",
     channels: "Perfil de empresa en Google si es elegible, Instagram y WhatsApp Business"
   },
   cafeteria: {
-    label: "Evocation Coffee", category: "CAFETERÍA · BOGOTÁ", icon: "☕", css: "business-cafeteria",
-    title: "Evocation Coffee: haz que cada taza cuente una historia.",
+    label: "Cafetería del barrio", category: "CAFETERÍA · BOGOTÁ", icon: "☕", css: "business-cafeteria",
+    title: "Cafetería del barrio: haz que cada taza cuente una historia.",
     problem: "Cuando hay muchas alternativas para tomar café, la experiencia, el ambiente y la facilidad para ubicar el lugar ayudan a diferenciarse.",
     value: "Muestra el café, el ambiente y las experiencias auténticas que hacen especial una visita.",
     audience: "Personas que disfrutan del café y buscan un lugar agradable para conversar o descansar.",
     ideas: ["Reel del proceso de preparación de una bebida", "Fotografía del ambiente con horarios y ubicación", "Publicación de una recomendación de producto o maridaje"],
-    message: "☕ ¿Buscas una pausa con buen café? Conoce Evocation Coffee. Escríbenos para consultar menú, ubicación y horarios de atención.",
+    message: "☕ ¿Buscas una pausa con buen café? Conoce Cafetería del barrio. Escríbenos para consultar menú, ubicación y horarios de atención.",
     metric: "Visitas originadas en canales digitales y ticket promedio",
     weeks: ["Cuenta la historia de la cafetería y su ubicación", "Muestra la preparación de una bebida", "Presenta un producto acompañante con precio", "Comparte testimonios autorizados y nuevas propuestas"],
     quick: "Graba una preparación breve con buena luz natural y añade dónde encontrar la cafetería.",
     channels: "Google Maps (según elegibilidad), contenido audiovisual y WhatsApp o canal de contacto"
   }
+};
+
+
+NEGOCIOS.otro = {
+  label: "Otro comercio o servicio", category: "COMERCIO LOCAL · EJEMPLO EDUCATIVO", icon: "🏪", css: "business-otro",
+  title: "Cada negocio tiene una historia y un reto propio.",
+  problem: "Este ejemplo orientativo debe adaptarse con la experiencia del comerciante.",
+  value: "Comunica qué ofreces, para quién y cómo contactarte.",
+  audience: "Los clientes que identifiques durante el diagnóstico.",
+  ideas: ["Presenta tu producto o servicio principal", "Explica cómo comprar o reservar", "Responde una pregunta frecuente de tus clientes"],
+  message: "¡Hola, barrio! Conoce lo que ofrecemos. Escríbenos para consultar productos, servicios, precios y horarios.",
+  metric: "Consultas que se convierten en ventas y clientes que regresan",
+  weeks: ["Define el reto y los clientes del negocio", "Presenta lo que ofreces y cómo contactarte", "Prueba una idea elegida con el grupo", "Revisa un indicador y comparte lo aprendido"],
+  quick: "Prepara una publicación con tu producto o servicio, precio orientativo, horario y canal de contacto.",
+  channels: "El canal que tus clientes ya utilizan y que puedas atender"
 };
 
 const FASES = [
@@ -189,38 +207,63 @@ const OBJECTIVES = {
   ventas: {title:"Elevar el valor de cada venta", task:"Evalúa productos complementarios o paquetes con costo y beneficio calculados antes de anunciarlos."}
 };
 function normalizeMoney(value){ const n=Number(value); return Number.isFinite(n)?Math.max(0,Math.min(n,100000000)):0; }
-$("plan-form").addEventListener("submit", (event)=>{
+
+$("plan-form").addEventListener("submit", (event) => {
   event.preventDefault();
-  const sector=$("plan-type").value, company=($("plan-name").value.trim()||NEGOCIOS[sector].label).slice(0,65);
-  const budget=normalizeMoney($("plan-budget").value), time=Number($("plan-time").value), goal=$("plan-goal").value;
-  const d=NEGOCIOS[sector], objective=OBJECTIVES[goal];
-  const actions=[
-    "Semana 1 · Diagnóstico: pregunta a 3 clientes cómo te conocieron y anota tus servicios o productos más rentables.",
-    "Semana 1 · Visibilidad: "+d.quick,
-    "Semana 2 · Canales: prioriza "+d.channels+".",
-    "Semana 3 · Conversión: "+objective.task,
-    time <= 1 ? "Semana 4 · En 1 hora semanal: prepara una publicación y revisa mensajes y consultas." : time === 2 ? "Semana 4 · Con 2 horas semanales: prepara dos contenidos, responde consultas y revisa resultados." : "Semana 4 · Con 4 horas o más: graba contenidos en lote, publica, conversa con clientes y documenta resultados.",
-    "Fin de mes · Mide: "+d.metric.toLowerCase()+"; calcula margen antes de ampliar cualquier campaña."
+  if (!$("plan-form").reportValidity()) return;
+  const sector = $("plan-type").value;
+  const company = ($("plan-name").value.trim() || "Mi negocio del barrio").slice(0, 65);
+  const budget = normalizeMoney($("plan-budget").value);
+  const time = Number($("plan-time").value);
+  const d = NEGOCIOS[sector], objective = OBJECTIVES[$("plan-goal").value];
+  const challenge = $("plan-challenge").value.trim();
+  const audience = $("plan-audience").value.trim();
+  const idea = $("plan-idea").value.trim();
+  const indicator = $("plan-indicator").value.trim();
+  const actions = [
+    "Días 1–7 · Escucha y diagnóstico: " + (challenge || "identifica con tus clientes el principal reto del negocio.") + (audience ? " Clientes identificados: " + audience + "." : ""),
+    "Días 8–14 · Presencia y canales: " + d.quick + " Prioriza " + d.channels + ".",
+    "Días 15–21 · Prueba participativa: " + (idea || objective.task),
+    "Días 22–28 · Registro: anota las consultas y ventas que puedas atribuir a la acción. " + (time <= 1 ? "Reserva una hora semanal para una acción y revisar mensajes." : "Distribuye tus " + time + " horas semanales entre contenido, atención y revisión."),
+    "Días 29–30 · Revisión: " + (indicator || "revisa " + d.metric.toLowerCase()) + ". Compara los resultados con el punto de partida y acuerda qué ajustar."
   ];
-  const investmentText= budget===0
-    ? "Presupuesto sugerido: $0 en anuncios. Prioriza fotografías propias, contenido orgánico, canales gratuitos y alianzas locales."
-    : budget<80000
-    ? `Presupuesto máximo declarado: ${formatCOP(budget)} al mes. Prioriza canales gratuitos; reserva una parte para material o pruebas pequeñas solo si el margen lo permite.`
-    : `Presupuesto mensual declarado: ${formatCOP(budget)}. Ejemplo de distribución orientativa: 50 % (${formatCOP(Math.round(budget*.5))}) prueba de publicidad, 30 % (${formatCOP(Math.round(budget*.3))}) contenido y 20 % (${formatCOP(budget-Math.round(budget*.5)-Math.round(budget*.3))}) experimentos/promociones rentables. No es obligatorio gastar el total.`;
-  $("result-title").textContent=`Plan de ${company}`;
-  $("result-summary").textContent=`Objetivo: ${objective.title}. Negocio: ${d.label}. Dedica unas ${time===1?"1 hora":time+" horas"} por semana. Confirma estas ideas con tus clientes reales.`;
+  const investmentText = budget === 0
+    ? "Presupuesto declarado: $0. Prioriza fotografías propias, canales gratuitos y alianzas; no se requiere pagar anuncios."
+    : "Presupuesto máximo declarado: " + formatCOP(budget) + ". Decide con el comerciante qué gasto es viable después de revisar sus costos. No es obligatorio gastar el total.";
+  const record = activeWorkshopId ? workshopRecords[activeWorkshopId] : null;
+  const followup = record && record.agreement && record.channel && record.review
+    ? "Seguimiento: " + record.agreement + ". Canal: " + record.channel + ". Fecha acordada: " + displayDate(record.review) + "."
+    : "Seguimiento: acuerda con el grupo qué avance compartir, la fecha y el canal; regístralo en la ficha del encuentro.";
+  $("result-title").textContent = "Plan de " + company;
+  $("result-summary").textContent = "Objetivo: " + objective.title + ". Tipo: " + d.label + ". Tiempo: " + time + " hora(s) por semana. " + followup;
   $("result-actions").replaceChildren();
-  actions.forEach((action)=>{const li=document.createElement("li");li.textContent=action;$("result-actions").appendChild(li);});
-  $("result-budget").textContent=investmentText;
-  ultimoPlan=`IMPULSA LOCAL · PLAN INICIAL DE MARKETING\n\nNegocio: ${company}\nTipo: ${d.label}\nObjetivo: ${objective.title}\nTiempo semanal: ${time} hora(s)\nPresupuesto: ${formatCOP(budget)}\n\nACCIONES:\n${actions.map((action,i)=>`${i+1}. ${action}`).join("\n")}\n\n${investmentText}\n\nNOTA: guía educativa; valida con clientes y costos reales.`;
-  $("plan-result").hidden=false;
-  $("plan-result").focus(); aviso("¡Tu plan inicial está listo!");
+  actions.forEach(action => { const li = document.createElement("li"); li.textContent = action; $("result-actions").append(li); });
+  $("result-budget").textContent = investmentText;
+  ultimoPlan = [
+    "EMPRENDIMIENTOS DEL BARRIO ARMENIA · PLAN DE 30 DÍAS", "",
+    "Negocio o alias: " + company, "Tipo: " + d.label, "Objetivo: " + objective.title,
+    "Reto: " + (challenge || "Por precisar con el comerciante"), "Clientes: " + (audience || "Por precisar"),
+    "Idea construida con el grupo: " + (idea || "Pendiente de acordar"),
+    "Meta e indicador: " + (indicator || "Por precisar"),
+    "Tiempo semanal: " + time + " hora(s)", investmentText, "",
+    ...actions.map((action, i) => (i + 1) + ". " + action), "", followup, "",
+    "Guía educativa: las acciones y los resultados deben validarse con el negocio. Este documento no certifica asistencia."
+  ].join("\n");
+  if (record) {
+    record.plan = ultimoPlan;
+    record.planInputs = { budget, time, goal: $("plan-goal").value, indicator };
+    persistWorkshop();
+    updateWorkshopSteps();
+  }
+  $("plan-result").hidden = false;
+  $("plan-result").focus();
+  aviso(record ? "Plan guardado en la ficha " + activeWorkshopId : "Tu plan de 30 días está listo");
 });
 $("result-close").addEventListener("click",()=>{$("plan-result").hidden=true;});
 $("download-plan").addEventListener("click",()=>{
   if (!ultimoPlan) return;
   const url=URL.createObjectURL(new Blob([ultimoPlan],{type:"text/plain;charset=utf-8"}));
-  const a=document.createElement("a"); a.href=url;a.download="mi-plan-impulsa-local.txt";document.body.appendChild(a);a.click();a.remove();
+  const a=document.createElement("a"); a.href=url;a.download="mi-plan-barrio-armenia.txt";document.body.appendChild(a);a.click();a.remove();
   setTimeout(()=>URL.revokeObjectURL(url),1500);
 });
 $("print-plan").addEventListener("click",()=>window.print());
@@ -228,18 +271,34 @@ $("print-plan").addEventListener("click",()=>window.print());
 // ---------------------------------------
 // 4. Calculadora: ventas ≠ utilidades.
 // ---------------------------------------
+
+function readCalculation() {
+  const ids = ["calc-investment", "calc-customers", "calc-ticket", "calc-cost"];
+  const inputs = ids.map(id => $(id));
+  inputs.forEach(input => input.setCustomValidity(""));
+  const values = inputs.map(input => input.value.trim() === "" ? NaN : Number(input.value));
+  for (let i = 0; i < inputs.length; i++) {
+    if (!Number.isFinite(values[i]) || values[i] < 0) {
+      inputs[i].setCustomValidity("Escribe un número mayor o igual a cero.");
+      return null;
+    }
+  }
+  if (!Number.isInteger(values[1])) {
+    inputs[1].setCustomValidity("El número de clientes debe ser entero.");
+    return null;
+  }
+  const [investment, customers, ticket, cost] = values;
+  const revenue = customers * ticket, contribution = revenue - customers * cost - investment;
+  if (!Number.isFinite(revenue) || !Number.isFinite(contribution)) return null;
+  return { investment, customers, ticket, cost, revenue, contribution, cac: customers > 0 ? investment / customers : null };
+}
 function recalc() {
-  const investment=normalizeMoney($("calc-investment").value),
-  customers=normalizeMoney($("calc-customers").value),
-  ticket=normalizeMoney($("calc-ticket").value),
-  cost=normalizeMoney($("calc-cost").value);
-  const revenue=customers*ticket;
-  const cac=customers>0?investment/customers:0;
-  const contribution=revenue-customers*cost-investment;
-  $("calc-revenue").textContent=formatCOP(revenue);
-  $("calc-cac").textContent=customers>0?formatCOP(cac):"No calculable";
-  $("calc-contribution").textContent=formatCOP(contribution);
-  $("calc-net").classList.toggle("negative",contribution<0);
+  const data = readCalculation();
+  $("calc-revenue").textContent = data ? formatCOP(data.revenue) : "Completa los datos";
+  $("calc-cac").textContent = data && data.cac !== null ? formatCOP(data.cac) : "No calculable";
+  $("calc-contribution").textContent = data ? formatCOP(data.contribution) : "Completa los datos";
+  $("calc-net").classList.toggle("negative", !!data && data.contribution < 0);
+  $("calculation-status").textContent = data ? "La estimación cambia al modificar los datos. Guarda la práctica que acuerdes con tu negocio." : "Revisa los campos: usa valores no negativos y un número entero de clientes.";
 }
 ["calc-investment","calc-customers","calc-ticket","calc-cost"].forEach(id=>$(id).addEventListener("input",recalc));
 recalc();
@@ -265,7 +324,7 @@ document.querySelectorAll(".roadmap-step").forEach(btn=>btn.addEventListener("cl
 showPhase(0);
 
 // ---------------------------------------
-// 6. Guion de video y enlaces personales
+// 6. Entrevistas de apoyo al aprendizaje
 // ---------------------------------------
 // La sección de guion editorial fue eliminada de index.html.
 function youtubeEmbed(link) {
@@ -288,11 +347,6 @@ if (embedSrc) {
   frame.src=embedSrc;frame.allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
   frame.referrerPolicy="strict-origin-when-cross-origin";frame.allowFullscreen=true;
   $("expert-video-container").replaceChildren(frame);
-}
-const enlaceLinkedIn = $("linkedin-link");
-if (enlaceLinkedIn && /^https:\/\/(www\.)?linkedin\.com\/in\/[a-zA-Z0-9_-]+\/?(?:[?#].*)?$/.test(CONFIG.LINKEDIN_URL.trim())) {
-  enlaceLinkedIn.href = CONFIG.LINKEDIN_URL.trim();
-  enlaceLinkedIn.hidden = false;
 }
 
 // ---------------------------------------
@@ -371,3 +425,213 @@ function activarControlesVideo(nombre) {
 
 activarControlesVideo("maria");
 activarControlesVideo("abraham");
+
+// 8. Fichas del taller: trabajo local, exportación y seguimiento.
+const WORKSHOP_STORAGE_KEY = "barrio-armenia-taller-v1";
+const PARTICIPANT_IDS = ["P01", "P02", "P03", "P04", "P05", "P06"];
+const workshopRecords = Object.fromEntries(PARTICIPANT_IDS.map(id => [id, emptyWorkshopRecord()]));
+let activeWorkshopId = null;
+let workshopStorageAvailable = true;
+
+function emptyWorkshopRecord() {
+  return { business: "", type: "tienda", challenge: "", audience: "", idea: "", agreement: "", channel: "", review: "", consent: false, plan: "", planInputs: null, calculation: null };
+}
+function displayDate(value) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value || "")) return "Por confirmar";
+  const [year, month, day] = value.split("-");
+  return day + "/" + month + "/" + year;
+}
+function persistWorkshop() {
+  try {
+    localStorage.setItem(WORKSHOP_STORAGE_KEY, JSON.stringify(workshopRecords));
+    workshopStorageAvailable = true;
+    return true;
+  } catch {
+    workshopStorageAvailable = false;
+    $("community-status").textContent = "Este navegador no permite guardar la ficha. Descárgala antes de cerrar la página.";
+    return false;
+  }
+}
+function currentWorkshopRecord() {
+  return workshopRecords[$("community-participant").value];
+}
+function hasDiagnostic(record) {
+  return !!(record.challenge && record.audience && record.idea);
+}
+function updateWorkshopSteps() {
+  const record = currentWorkshopRecord();
+  const checks = [
+    ["workshop-diagnostic", "Diagnóstico", hasDiagnostic(record)],
+    ["workshop-plan", "Plan de 30 días", !!record.plan],
+    ["workshop-calculation", "Práctica de costos", !!record.calculation],
+    ["workshop-followup", "Acuerdo de seguimiento", !!(record.agreement && record.channel && record.review)]
+  ];
+  checks.forEach(([id, label, complete]) => {
+    $(id).textContent = label + (complete ? ": guardado en esta ficha" : ": pendiente");
+    $(id).classList.toggle("done", complete);
+  });
+}
+const WORKSHOP_FIELDS = {
+  business: "community-business", type: "community-type", challenge: "community-challenge", audience: "community-audience",
+  idea: "community-idea", agreement: "community-agreement", channel: "community-channel", review: "community-review"
+};
+function saveWorkshopDraft() {
+  const record = currentWorkshopRecord();
+  const oldDiagnostic = [record.business, record.type, record.challenge, record.audience, record.idea].join("|");
+  Object.entries(WORKSHOP_FIELDS).forEach(([key, id]) => { record[key] = $(id).value.trim(); });
+  record.consent = $("community-consent").checked;
+  const newDiagnostic = [record.business, record.type, record.challenge, record.audience, record.idea].join("|");
+  if (oldDiagnostic !== newDiagnostic) {
+    record.plan = ""; record.planInputs = null;
+    if (activeWorkshopId === $("community-participant").value) {
+      activeWorkshopId = null; ultimoPlan = ""; $("plan-result").hidden = true;
+      $("plan-workshop-note").textContent = "El diagnóstico cambió. Guarda la ficha y genera de nuevo tu plan.";
+    }
+  }
+  const saved = persistWorkshop();
+  updateWorkshopSteps();
+  return saved;
+}
+function fillPlannerFromWorkshop(record, id) {
+  activeWorkshopId = id;
+  showBusiness(Object.hasOwn(NEGOCIOS, record.type) ? record.type : "otro");
+  $("plan-name").value = record.business || id;
+  $("plan-challenge").value = record.challenge;
+  $("plan-audience").value = record.audience;
+  $("plan-idea").value = record.idea;
+  $("plan-indicator").value = record.planInputs?.indicator || "";
+  $("plan-budget").value = record.planInputs?.budget ?? 0;
+  $("plan-time").value = String(record.planInputs?.time ?? 2);
+  $("plan-goal").value = record.planInputs?.goal || "clientes";
+  $("plan-workshop-note").textContent = "Ficha activa: " + id + ". El plan que generes se guardará aquí. Puedes adaptarlo con el grupo.";
+}
+function loadWorkshopRecord() {
+  const id = $("community-participant").value, record = workshopRecords[id];
+  Object.entries(WORKSHOP_FIELDS).forEach(([key, field]) => { $(field).value = record[key]; });
+  $("community-consent").checked = record.consent;
+  activeWorkshopId = null; ultimoPlan = ""; $("plan-result").hidden = true;
+  $("plan-name").value = ""; $("plan-challenge").value = ""; $("plan-audience").value = ""; $("plan-idea").value = ""; $("plan-indicator").value = "";
+  $("plan-workshop-note").textContent = "Para vincular el plan a " + id + ", guarda primero su diagnóstico.";
+  if (hasDiagnostic(record)) fillPlannerFromWorkshop(record, id);
+  const exercise = record.calculation;
+  const values = exercise ? [exercise.investment, exercise.customers, exercise.ticket, exercise.cost] : [150000, 15, 25000, 12000];
+  ["calc-investment", "calc-customers", "calc-ticket", "calc-cost"].forEach((field, i) => { $(field).value = values[i]; });
+  recalc();
+  $("calculation-status").textContent = exercise ? "Práctica guardada de la ficha " + id + ". Puedes revisarla y volver a guardarla." : "Valores de ejemplo: reemplázalos con los datos de tu negocio antes de guardar.";
+  $("community-status").textContent = workshopStorageAvailable ? "Ficha " + id + " cargada. Los cambios se guardan solo en este navegador." : "Ficha " + id + " cargada en memoria. Descárgala antes de cerrar.";
+  updateWorkshopSteps();
+}
+function downloadText(filename, content) {
+  const url = URL.createObjectURL(new Blob([content], { type: "text/plain;charset=utf-8" }));
+  const link = document.createElement("a"); link.href = url; link.download = filename;
+  document.body.append(link); link.click(); link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1500);
+}
+try {
+  const saved = JSON.parse(localStorage.getItem(WORKSHOP_STORAGE_KEY) || "null");
+  if (saved && typeof saved === "object") PARTICIPANT_IDS.forEach(id => {
+    const source = saved[id]; if (!source || typeof source !== "object") return;
+    const record = workshopRecords[id];
+    Object.keys(WORKSHOP_FIELDS).forEach(key => { if (typeof source[key] === "string") record[key] = source[key].slice(0, 500); });
+    record.type = Object.hasOwn(NEGOCIOS, record.type) ? record.type : "otro";
+    record.consent = source.consent === true;
+    record.plan = typeof source.plan === "string" ? source.plan.slice(0, 15000) : "";
+    if (source.planInputs && typeof source.planInputs === "object") {
+      const inputs = source.planInputs;
+      record.planInputs = {
+        budget: normalizeMoney(inputs.budget), time: [1, 2, 4].includes(inputs.time) ? inputs.time : 2,
+        goal: Object.hasOwn(OBJECTIVES, inputs.goal) ? inputs.goal : "clientes",
+        indicator: typeof inputs.indicator === "string" ? inputs.indicator.slice(0, 250) : ""
+      };
+    }
+    const exercise = source.calculation;
+    if (exercise && ["investment", "customers", "ticket", "cost"].every(key => Number.isFinite(exercise[key]) && exercise[key] >= 0) && Number.isInteger(exercise.customers)) {
+      const revenue = exercise.customers * exercise.ticket;
+      const contribution = revenue - exercise.customers * exercise.cost - exercise.investment;
+      if (Number.isFinite(revenue) && Number.isFinite(contribution)) record.calculation = { investment: exercise.investment, customers: exercise.customers, ticket: exercise.ticket, cost: exercise.cost, revenue, contribution, cac: exercise.customers ? exercise.investment / exercise.customers : null };
+    }
+  });
+} catch {
+  workshopStorageAvailable = false;
+}
+$("community-form").addEventListener("input", event => {
+  if (event.target.id !== "community-participant") saveWorkshopDraft();
+});
+$("community-participant").addEventListener("change", loadWorkshopRecord);
+$("community-form").addEventListener("submit", event => {
+  event.preventDefault();
+  if (!$("community-form").reportValidity()) return;
+  const saved = saveWorkshopDraft();
+  fillPlannerFromWorkshop(currentWorkshopRecord(), $("community-participant").value);
+  $("community-status").textContent = saved ? "Diagnóstico guardado. Adapta y genera tu plan; luego practica la calculadora y completa el acuerdo." : "Diagnóstico listo en memoria. Descarga la ficha antes de cerrar.";
+  $("planificador").scrollIntoView({ behavior: "smooth", block: "start" });
+  $("plan-name").focus({ preventScroll: true });
+});
+$("save-calculation").addEventListener("click", () => {
+  if (!activeWorkshopId || !hasDiagnostic(workshopRecords[activeWorkshopId])) {
+    aviso("Guarda primero tu diagnóstico en Comunidad."); return;
+  }
+  const calculation = readCalculation();
+  if (!calculation) {
+    const invalid = ["calc-investment", "calc-customers", "calc-ticket", "calc-cost"].map(id => $(id)).find(input => !input.validity.valid);
+    if (invalid) invalid.reportValidity();
+    aviso("Revisa los datos de la calculadora."); return;
+  }
+  const record = workshopRecords[activeWorkshopId];
+  record.calculation = calculation;
+  const saved = persistWorkshop(); updateWorkshopSteps();
+  $("calculation-status").textContent = saved ? "Práctica guardada en " + activeWorkshopId + ". Es una estimación; no certifica ventas ni beneficios obtenidos." : "Práctica guardada en memoria. Descarga tu ficha antes de cerrar.";
+});
+$("community-download").addEventListener("click", () => {
+  saveWorkshopDraft();
+  const id = $("community-participant").value, record = workshopRecords[id], exercise = record.calculation;
+  const exerciseText = exercise ? [
+    "Inversión de campaña: " + formatCOP(exercise.investment), "Clientes atribuibles: " + exercise.customers,
+    "Venta promedio: " + formatCOP(exercise.ticket), "Costo variable por venta: " + formatCOP(exercise.cost),
+    "Ingresos atribuidos estimados: " + formatCOP(exercise.revenue),
+    "Costo de adquisición: " + (exercise.cac === null ? "No calculable sin clientes" : formatCOP(exercise.cac)),
+    "Contribución tras costos variables y campaña: " + formatCOP(exercise.contribution),
+    "Faltan costos fijos e impuestos; esta práctica no acredita resultados reales."
+  ].join("\n") : "Pendiente de guardar la práctica con los datos del negocio.";
+  const text = [
+    "EMPRENDIMIENTOS DEL BARRIO ARMENIA · FICHA PARTICIPATIVA", "",
+    "Comunidad: " + CONFIG.NOMBRE_COMUNIDAD, "Fecha del taller: " + displayDate(CONFIG.FECHA_TALLER),
+    "Código: " + id, "Negocio o alias: " + (record.business || id),
+    "Autorización declarada para compartir esta ficha: " + (record.consent ? "Sí. Verificar y conservar el permiso y su alcance." : "Pendiente. Uso interno; no publicar datos identificables."),
+    "", "DIAGNÓSTICO", "Reto: " + (record.challenge || "Pendiente"), "Clientes: " + (record.audience || "Pendiente"),
+    "Idea construida con el grupo: " + (record.idea || "Pendiente"), "",
+    "PLAN DE 30 DÍAS", record.plan || "Pendiente de generar.", "", "PRÁCTICA DE LA CALCULADORA", exerciseText, "",
+    "ACUERDO DE SEGUIMIENTO", "Avance a compartir: " + (record.agreement || "Pendiente"),
+    "Canal acordado: " + (record.channel || "Pendiente"), "Fecha de revisión: " + displayDate(record.review), "",
+    "La ficha documenta información ingresada; no certifica asistencia ni realización del taller."
+  ].join("\n");
+  downloadText("ficha-barrio-armenia-" + id + ".txt", text);
+});
+let clearConfirmationUntil = 0;
+$("community-clear").addEventListener("click", () => {
+  if (Date.now() > clearConfirmationUntil) {
+    clearConfirmationUntil = Date.now() + 10000;
+    aviso("Pulsa otra vez en 10 segundos para borrar la ficha actual. Descarga antes tu copia."); return;
+  }
+  clearConfirmationUntil = 0;
+  workshopRecords[$("community-participant").value] = emptyWorkshopRecord();
+  const saved = persistWorkshop(); loadWorkshopRecord();
+  aviso(saved ? "Se borraron los datos de esta ficha." : "Se borró la ficha en memoria; el navegador no permite confirmar el borrado guardado.");
+});
+$("community-name").textContent = CONFIG.NOMBRE_COMUNIDAD;
+$("community-date").textContent = displayDate(CONFIG.FECHA_TALLER);
+const authorizedCases = CONFIG.CASOS_AUTORIZADOS.filter(item => item && item.autorizado === true && ["nombre", "reto", "clientes", "idea"].every(key => typeof item[key] === "string" && item[key].trim()));
+if (authorizedCases.length) {
+  const container = $("community-cases"); container.replaceChildren();
+  authorizedCases.forEach(item => {
+    const card = document.createElement("article"); card.className = "community-case";
+    const title = document.createElement("h4"); title.textContent = item.nombre; card.append(title);
+    [["reto", "Reto identificado"], ["clientes", "Sus clientes"], ["idea", "Idea construida con la comunidad"]].forEach(([key, label]) => {
+      const paragraph = document.createElement("p"), strong = document.createElement("strong");
+      strong.textContent = label; paragraph.append(strong, document.createTextNode(item[key])); card.append(paragraph);
+    });
+    container.append(card);
+  });
+}
+loadWorkshopRecord();
+
