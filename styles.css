@@ -469,3 +469,9 @@ textarea{font:inherit;width:100%;resize:vertical;min-height:74px;border:1px soli
 @media(max-width:1000px){.workshop-route{grid-template-columns:repeat(2,minmax(0,1fr))}.community-facts{grid-template-columns:1fr}.workshop-step>p{min-height:0}}
 @media(max-width:650px){.workshop-route{grid-template-columns:1fr;gap:12px}.workshop-step{padding:22px}.workshop-step-heading{margin-bottom:13px}.workshop-step>p{margin-bottom:16px}.community-cases{grid-template-columns:1fr}.scenario-card{padding:22px}.scenario-card h4{font-size:23px}.community-section .section-top h2{font-size:35px;letter-spacing:-1.4px}.scenario-contribution{flex-wrap:wrap}.scenario-plan li{grid-template-columns:61px minmax(0,1fr);gap:8px}}
 
+/* Fecha del encuentro y propuestas de trabajo */
+.community-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+.scenario-voice{font-style:normal}
+@media(min-width:1050px){.community-facts{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:650px){.community-facts{grid-template-columns:1fr}}
+
