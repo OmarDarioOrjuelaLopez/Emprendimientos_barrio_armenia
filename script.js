@@ -8,7 +8,7 @@
 const CONFIG = {
   VIDEO_YOUTUBE_URL: "",
   NOMBRE_COMUNIDAD: "Comerciantes del barrio Armenia",
-  FECHA_TALLER: "", // Completar únicamente con la fecha real confirmada (AAAA-MM-DD).
+  FECHA_TALLER: "2026-11-16",
 };
 
 const NEGOCIOS = {
@@ -74,7 +74,7 @@ const PRACTICE_CASES = [
     "icon": "🥟",
     "category": "COMIDAS Y PASABOCAS",
     "name": "Comidas y pasabocas de Óscar",
-    "voice": "Preparo comidas y pasabocas, pero muchas personas del sector aún no conocen mi oferta. Quiero mostrar lo que vendo y facilitar los pedidos sin gastar demasiado.",
+    "voice": "Esta propuesta se centra en organizar la oferta de comidas y pasabocas y facilitar que los clientes consulten el menú y hagan sus pedidos.",
     "challenge": "Dar a conocer los productos y facilitar los pedidos desde el celular.",
     "audience": "Vecinos, estudiantes y trabajadores cercanos que buscan una opción rápida y económica.",
     "idea": "Crear un menú de WhatsApp con fotografías propias, precios, horarios y una forma clara de pedir.",
@@ -91,14 +91,14 @@ const PRACTICE_CASES = [
     "customers": 12,
     "ticket": 9000,
     "cost": 5500,
-    "lesson": "Este escenario deja una contribución negativa: conviene revisar el costo, el precio y la inversión antes de repetir la campaña."
+    "lesson": "Este ejercicio deja una contribución negativa: conviene revisar el costo, el precio y la inversión antes de repetir la campaña."
   },
   {
     "key": "ambulante",
     "icon": "🍔",
     "category": "COMIDA AMBULANTE",
     "name": "Hamburguesas y perros calientes de Mary",
-    "voice": "A veces mis clientes no saben si estoy atendiendo o dónde encontrarme. Quiero organizar la información y responder más rápido las preguntas que se repiten.",
+    "voice": "Esta propuesta organiza la comunicación del menú, el horario y el punto de atención para facilitar las consultas y los pedidos.",
     "challenge": "Comunicar de forma oportuna el horario, la disponibilidad y el punto de atención.",
     "audience": "Vecinos y personas que salen de trabajar y buscan comida preparada durante la tarde o la noche.",
     "idea": "Usar una plantilla de estado de WhatsApp con menú, horario y ubicación confirmada para cada jornada.",
@@ -122,7 +122,7 @@ const PRACTICE_CASES = [
     "icon": "✂",
     "category": "BARBERÍA",
     "name": "Fred Authentic",
-    "voice": "Quiero que las personas que todavía no me conocen puedan ver mi trabajo. También busco facilitar las reservas y organizar mejor las respuestas a las consultas.",
+    "voice": "Esta propuesta combina la presentación de los servicios de barbería con una forma clara de consultar horarios y reservar citas.",
     "challenge": "Mostrar la calidad del servicio y convertir las consultas en citas atendidas.",
     "audience": "Personas del sector que valoran un buen corte, puntualidad y facilidad para reservar.",
     "idea": "Publicar trabajos con permiso del cliente y acompañarlos de una invitación clara para consultar horarios y reservar.",
@@ -146,7 +146,7 @@ const PRACTICE_CASES = [
     "icon": "☕",
     "category": "CAFETERÍA",
     "name": "Evocation Coffee",
-    "voice": "Quiero comunicar mejor la experiencia de tomar café en nuestro negocio. Antes de invertir más en publicidad, necesito revisar qué contenido interesa y cuánto deja una promoción.",
+    "voice": "Esta propuesta busca comunicar la experiencia de la cafetería y evaluar el margen de una combinación de café y acompañamiento.",
     "challenge": "Dar a conocer la experiencia del negocio y evaluar el margen de una promoción.",
     "audience": "Personas que buscan café, una pausa o un espacio para conversar.",
     "idea": "Mostrar la preparación de una bebida y evaluar una combinación de café y acompañamiento, calculando sus costos.",
@@ -347,7 +347,7 @@ $("plan-form").addEventListener("submit", (event) => {
   actions.forEach(action => { const li = document.createElement("li"); li.textContent = action; $("result-actions").append(li); });
   $("result-budget").textContent = investmentText;
   ultimoPlan = [
-    (practiceContext ? "ESCENARIO DE PRÁCTICA · " : "") + "EMPRENDIMIENTOS DEL BARRIO ARMENIA · PLAN DE 30 DÍAS", "",
+    (practiceContext ? "PROPUESTA DE TRABAJO · " : "") + "EMPRENDIMIENTOS DEL BARRIO ARMENIA · PLAN DE 30 DÍAS", "",
     "Negocio o alias: " + company, "Tipo: " + d.label, "Objetivo: " + objective.title,
     "Reto: " + (challenge || "Identificar el principal reto del negocio"), "Clientes: " + (audience || "Describir a quienes compran en el negocio"),
     "Idea para trabajar con el grupo: " + (idea || "Elegir una acción viable"),
@@ -684,7 +684,7 @@ $("save-calculation").addEventListener("click", () => {
     const exercise = readCalculation();
     if (!exercise) { aviso("Revisa los datos de la calculadora."); return; }
     downloadText("ejercicio-" + practiceContext.key + "-barrio-armenia.txt", [
-      "ESCENARIO DE PRÁCTICA · CIFRAS ILUSTRATIVAS", practiceContext.name, "",
+      "PROPUESTA DE TRABAJO · CIFRAS ILUSTRATIVAS", practiceContext.name, "",
       "Inversión: " + formatCOP(exercise.investment), "Clientes atribuibles: " + exercise.customers,
       "Venta por cliente: " + formatCOP(exercise.ticket), "Costo variable por venta: " + formatCOP(exercise.cost),
       "Ingresos atribuidos: " + formatCOP(exercise.revenue),
@@ -726,7 +726,7 @@ $("community-download").addEventListener("click", () => {
     "Código: " + id, "Negocio o alias: " + (record.business || id),
     "Autorización declarada para compartir esta ficha: " + (record.consent ? "Sí. Verificar y conservar el permiso y su alcance." : "Uso personal de la ficha. No habilitada para publicación de datos identificables."),
     "", "DIAGNÓSTICO", "Reto: " + (record.challenge || "Describe el reto del negocio"), "Clientes: " + (record.audience || "Identifica a sus clientes"),
-    "Idea construida con el grupo: " + (record.idea || "Elige una idea para probar"), "",
+    "Idea de trabajo: " + (record.idea || "Elige una idea para probar"), "",
     "PLAN DE 30 DÍAS", record.plan || "Crea tu ruta con el planificador.", "", "PRÁCTICA DE LA CALCULADORA", exerciseText, "",
     "ACUERDO DE SEGUIMIENTO", "Avance a compartir: " + (record.agreement || "Elige un avance para compartir"),
     "Canal acordado: " + (record.channel || "Elige el canal con tu grupo"), "Fecha de revisión: " + displayDate(record.review), "",
@@ -746,6 +746,7 @@ $("community-clear").addEventListener("click", () => {
   aviso(saved ? "Se borraron los datos de esta ficha." : "Se borró la ficha en memoria; el navegador no permite confirmar el borrado guardado.");
 });
 $("community-name").textContent = CONFIG.NOMBRE_COMUNIDAD;
+$("community-date").textContent = new Intl.DateTimeFormat("es-CO", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(CONFIG.FECHA_TALLER + "T12:00:00Z"));
 loadWorkshopRecord();
 
 function loadPracticeCase(key) {
@@ -763,17 +764,17 @@ function loadPracticeCase(key) {
   $("plan-budget").value = item.investment;
   $("plan-time").value = "2";
   $("plan-goal").value = "clientes";
-  $("plan-workshop-note").textContent = "Escenario de práctica: " + item.name + ". Personaliza las acciones y genera tu plan con estas cifras ilustrativas.";
+  $("plan-workshop-note").textContent = "Propuesta de trabajo: " + item.name + ". Personaliza las acciones y genera tu plan con estas cifras ilustrativas.";
   ["calc-investment", "calc-customers", "calc-ticket", "calc-cost"].forEach((id, i) => {
     $(id).value = [item.investment, item.customers, item.ticket, item.cost][i];
   });
   recalc();
   $("save-calculation").textContent = "Descargar este ejercicio";
-  $("calculation-status").textContent = "Cifras ilustrativas del escenario de " + item.name + ". Puedes modificarlas para explorar otras decisiones.";
+  $("calculation-status").textContent = "Cifras ilustrativas de la propuesta de " + item.name + ". Puedes modificarlas para explorar otras decisiones.";
   document.querySelectorAll(".scenario-card").forEach(card => card.classList.toggle("is-selected", card.dataset.case === key));
   $("planificador").scrollIntoView({ behavior: "smooth", block: "start" });
   $("plan-name").focus({ preventScroll: true });
-  aviso("Escenario cargado en el planificador y la calculadora.");
+  aviso("Propuesta cargada en el planificador y la calculadora.");
 }
 document.querySelectorAll("[data-scenario]").forEach(button => {
   button.addEventListener("click", () => loadPracticeCase(button.dataset.scenario));
