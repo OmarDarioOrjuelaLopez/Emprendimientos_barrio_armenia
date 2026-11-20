@@ -421,3 +421,51 @@ textarea{font:inherit;width:100%;resize:vertical;min-height:74px;border:1px soli
 @media(max-width:600px){.brand{font-size:15px;gap:8px}.brand-place{font-size:13px}.brand small{font-size:8px}.brand-icon{width:42px;height:42px;flex-basis:42px}.workshop-card,.workshop-aside{padding:22px}.workshop-route{gap:10px}.workshop-route li{padding:16px}.workshop-buttons{display:grid}.workshop-buttons .btn{width:100%}.community-facts>div{padding:18px}.contact-card h3{font-size:24px}.footer-brand{max-width:290px}.footer-main{gap:28px}}
 @media print{.community-section{display:none!important}}
 
+/* Ruta participativa y escenarios de práctica */
+.community-section .section-top h2{font-size:clamp(34px,4vw,54px);letter-spacing:-2px}
+.community-facts{grid-template-columns:1.25fr 1fr 1fr;gap:14px;background:transparent;border:0;overflow:visible}
+.community-facts>div{border:1px solid #dce6d7;border-radius:18px;padding:24px;box-shadow:0 6px 20px rgba(23,50,35,.025)}
+.community-facts small{letter-spacing:1.5px;font-size:10px;margin-bottom:12px}
+.community-facts strong{font-size:19px;line-height:1.4}.community-facts span{margin-top:9px;line-height:1.65}
+.workshop-route{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:15px;padding:0;margin:30px 0 40px}
+.workshop-step{position:relative;padding:25px 22px 23px;border:1px solid #d6e3d2;border-radius:20px;background:linear-gradient(145deg,#fff 0%,#f1f6e9 100%);box-shadow:0 10px 26px rgba(23,50,35,.035);min-width:0;overflow:hidden}
+.workshop-step:after{content:"";position:absolute;width:100px;height:100px;border:1px solid #dfebd7;border-radius:50%;right:-48px;top:-46px;pointer-events:none}
+.workshop-step-heading{display:flex;align-items:center;gap:12px;margin-bottom:19px}
+.workshop-step-number{display:grid;place-items:center;flex:0 0 44px;width:44px;height:44px;border-radius:14px;background:#173a33;color:#dafa79;font:800 15px/1 Manrope,sans-serif;font-variant-numeric:tabular-nums}
+.workshop-step h3{margin:0;font:800 20px/1.25 Manrope,sans-serif;letter-spacing:-.5px;color:#17322b}
+.workshop-step>p{margin:0 0 21px;font-size:13px;line-height:1.8;color:#5b7063;min-height:70px}
+.workshop-step-tag{display:inline-flex;border:1px solid #d7e5cd;border-radius:50px;padding:7px 10px;background:#f9fcf5;font-size:10px;font-weight:700;color:#52704f}
+.community-cases-heading{margin:64px 0 28px;max-width:780px}
+.community-cases-heading h3{font-size:clamp(29px,3.2vw,42px);line-height:1.2;letter-spacing:-1.4px}
+.community-cases{gap:24px;align-items:start}
+.scenario-card{padding:29px;background:#fff;border-radius:24px;box-shadow:0 12px 35px rgba(19,49,30,.035);transition:border-color .2s,box-shadow .2s}
+.scenario-card.is-selected{border-color:#69a17e;box-shadow:0 0 0 3px #e0efd6}
+.scenario-card-top{display:flex;gap:12px;align-items:center;margin-bottom:20px}
+.scenario-icon{display:grid;place-items:center;width:48px;height:48px;flex:none;background:#eef5e6;border-radius:14px;font-size:25px}
+.scenario-category{font-size:10px;font-weight:800;letter-spacing:1.1px;color:#638065}
+.scenario-card h4{font:800 25px/1.3 Manrope,sans-serif;letter-spacing:-.8px;margin:0 0 20px;color:#17322b}
+.scenario-card p{line-height:1.8}.scenario-voice{padding:20px;background:#f4f7ef;border-left:3px solid #b8d786;border-radius:0 14px 14px 0;color:#5e7060;margin:0 0 24px;font-style:italic}
+.scenario-voice strong{font-style:normal;font-size:10px;letter-spacing:1.1px;text-transform:uppercase;margin-bottom:8px}
+.scenario-diagnosis{margin:0}.scenario-diagnosis>div{margin-bottom:19px}
+.scenario-diagnosis dt{font-size:11px;font-weight:800;letter-spacing:.4px;color:#2d634c;margin-bottom:6px}
+.scenario-diagnosis dd{margin:0;font-size:13px;color:#657168;line-height:1.8}
+.scenario-details{border-top:1px solid #e2eadc;border-bottom:1px solid #e2eadc;margin:24px 0}
+.scenario-details summary{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:18px 0;font-size:12px;font-weight:800;color:#2d634c;cursor:pointer;list-style:none}
+.scenario-details summary::-webkit-details-marker{display:none}.scenario-details summary span{font-size:19px}
+.scenario-plan{list-style:none;margin:0 0 18px;padding:0;display:grid;gap:12px}
+.scenario-plan li{display:grid;grid-template-columns:70px minmax(0,1fr);gap:12px;font-size:12px;line-height:1.8}
+.scenario-plan strong{font-size:10px;color:#537048}.scenario-plan span{color:#68766c}
+.scenario-details>p{font-size:12px;color:#68766c;margin:15px 0}
+.scenario-numbers{border:1px solid #e2e9dd;border-radius:16px;overflow:hidden;background:#fbfcf9;margin-bottom:23px}
+.scenario-data-label{display:block;font-size:9px;font-weight:800;letter-spacing:1.5px;color:#6b8363;padding:18px 18px 0}
+.scenario-numbers dl{margin:0;padding:15px 18px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.scenario-numbers dl>div{min-width:0}.scenario-numbers dt{font-size:10px;color:#6b7c6f;line-height:1.6}
+.scenario-numbers dd{margin:4px 0 0;color:#193b30;font-size:16px;font-weight:800;line-height:1.4}
+.scenario-contribution{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:16px 18px;border-top:1px solid #e2e9dd;background:#eef5e7}
+.scenario-contribution span{font-size:10px;color:#56734c;line-height:1.6;max-width:160px}.scenario-contribution strong{font-size:20px;white-space:nowrap}
+.scenario-contribution.is-negative{background:#fff1e9}.scenario-contribution.is-negative strong{color:#a34c2d}
+.scenario-numbers>p{padding:0 18px;margin:14px 0 17px;font-size:11px;line-height:1.8;color:#798476}
+.scenario-button{width:100%;white-space:normal;text-align:center}
+@media(max-width:1000px){.workshop-route{grid-template-columns:repeat(2,minmax(0,1fr))}.community-facts{grid-template-columns:1fr}.workshop-step>p{min-height:0}}
+@media(max-width:650px){.workshop-route{grid-template-columns:1fr;gap:12px}.workshop-step{padding:22px}.workshop-step-heading{margin-bottom:13px}.workshop-step>p{margin-bottom:16px}.community-cases{grid-template-columns:1fr}.scenario-card{padding:22px}.scenario-card h4{font-size:23px}.community-section .section-top h2{font-size:35px;letter-spacing:-1.4px}.scenario-contribution{flex-wrap:wrap}.scenario-plan li{grid-template-columns:61px minmax(0,1fr);gap:8px}}
+
