@@ -9,9 +9,6 @@ const CONFIG = {
   VIDEO_YOUTUBE_URL: "",
   NOMBRE_COMUNIDAD: "Comerciantes del barrio Armenia",
   FECHA_TALLER: "", // Completar únicamente con la fecha real confirmada (AAAA-MM-DD).
-  // No incluir nombres, fotos, diagnósticos ni resultados sin autorización.
-  // Campos de un caso: { nombre, reto, clientes, idea, autorizado: true }.
-  CASOS_AUTORIZADOS: []
 };
 
 const NEGOCIOS = {
@@ -48,7 +45,7 @@ const NEGOCIOS = {
     value: "Demuestra tu técnica con trabajos reales, testimonios autorizados y disponibilidad de citas.",
     audience: "Personas de la zona que valoran técnica, puntualidad y buena atención.",
     ideas: ["Antes y después de un corte (con autorización)", "Video del proceso de un degradado o diseño", "Publicación de servicios, horarios y reservas"],
-    message: "✂️ En Barbería del barrio queremos que tu próximo corte sea fácil de reservar. Escríbenos para consultar servicios, precios y horarios disponibles.",
+    message: "✂️ En Fred Authentic queremos que tu próximo corte sea fácil de reservar. Escríbenos para consultar servicios, precios y horarios disponibles.",
     metric: "Citas nuevas, asistencia y clientes que regresan",
     weeks: ["Presenta al equipo, el local y servicios", "Publica un antes y después autorizado", "Comparte un consejo útil de cuidado capilar", "Muestra horarios y solicita reseñas honestas"],
     quick: "Graba un corte real en vertical y añade al final una invitación clara para consultar citas.",
@@ -61,7 +58,7 @@ const NEGOCIOS = {
     value: "Muestra el café, el ambiente y las experiencias auténticas que hacen especial una visita.",
     audience: "Personas que disfrutan del café y buscan un lugar agradable para conversar o descansar.",
     ideas: ["Reel del proceso de preparación de una bebida", "Fotografía del ambiente con horarios y ubicación", "Publicación de una recomendación de producto o maridaje"],
-    message: "☕ ¿Buscas una pausa con buen café? Conoce Cafetería del barrio. Escríbenos para consultar menú, ubicación y horarios de atención.",
+    message: "☕ ¿Buscas una pausa con buen café? Conoce Evocation Coffee. Escríbenos para consultar menú, ubicación y horarios de atención.",
     metric: "Visitas originadas en canales digitales y ticket promedio",
     weeks: ["Cuenta la historia de la cafetería y su ubicación", "Muestra la preparación de una bebida", "Presenta un producto acompañante con precio", "Comparte testimonios autorizados y nuevas propuestas"],
     quick: "Graba una preparación breve con buena luz natural y añade dónde encontrar la cafetería.",
@@ -69,6 +66,113 @@ const NEGOCIOS = {
   }
 };
 
+
+
+const PRACTICE_CASES = [
+  {
+    "key": "tienda",
+    "icon": "🥟",
+    "category": "COMIDAS Y PASABOCAS",
+    "name": "Comidas y pasabocas de Óscar",
+    "voice": "Preparo comidas y pasabocas, pero muchas personas del sector aún no conocen mi oferta. Quiero mostrar lo que vendo y facilitar los pedidos sin gastar demasiado.",
+    "challenge": "Dar a conocer los productos y facilitar los pedidos desde el celular.",
+    "audience": "Vecinos, estudiantes y trabajadores cercanos que buscan una opción rápida y económica.",
+    "idea": "Crear un menú de WhatsApp con fotografías propias, precios, horarios y una forma clara de pedir.",
+    "weeks": [
+      "Escuchar a los clientes y elegir los productos que más les interesan.",
+      "Preparar el menú y compartirlo con quienes acepten recibirlo.",
+      "Probar un combo después de calcular el margen por venta.",
+      "Revisar consultas, pedidos y costos para ajustar la propuesta."
+    ],
+    "indicator": "Contar los pedidos que llegan por el menú de WhatsApp.",
+    "followup": "Revisar cada semana las consultas recibidas y las preguntas de los clientes.",
+    "channel": "Conversación semanal entre comerciantes",
+    "investment": 50000,
+    "customers": 12,
+    "ticket": 9000,
+    "cost": 5500,
+    "lesson": "Este escenario deja una contribución negativa: conviene revisar el costo, el precio y la inversión antes de repetir la campaña."
+  },
+  {
+    "key": "ambulante",
+    "icon": "🍔",
+    "category": "COMIDA AMBULANTE",
+    "name": "Hamburguesas y perros calientes de Mary",
+    "voice": "A veces mis clientes no saben si estoy atendiendo o dónde encontrarme. Quiero organizar la información y responder más rápido las preguntas que se repiten.",
+    "challenge": "Comunicar de forma oportuna el horario, la disponibilidad y el punto de atención.",
+    "audience": "Vecinos y personas que salen de trabajar y buscan comida preparada durante la tarde o la noche.",
+    "idea": "Usar una plantilla de estado de WhatsApp con menú, horario y ubicación confirmada para cada jornada.",
+    "weeks": [
+      "Anotar las preguntas más frecuentes sobre el servicio.",
+      "Probar la plantilla de horario, menú y ubicación.",
+      "Mostrar la preparación de un producto y evaluar una oferta viable.",
+      "Registrar qué consultas terminan en pedidos y mejorar las respuestas."
+    ],
+    "indicator": "Contar las consultas sobre horario o ubicación que se convierten en pedidos.",
+    "followup": "Compartir semanalmente qué publicación resolvió más dudas y facilitó pedidos.",
+    "channel": "Conversación semanal entre comerciantes",
+    "investment": 60000,
+    "customers": 20,
+    "ticket": 16000,
+    "cost": 10000,
+    "lesson": "Relacionar cada pedido con su canal ayuda a decidir si la inversión y la forma de comunicar funcionan."
+  },
+  {
+    "key": "barberia",
+    "icon": "✂",
+    "category": "BARBERÍA",
+    "name": "Fred Authentic",
+    "voice": "Quiero que las personas que todavía no me conocen puedan ver mi trabajo. También busco facilitar las reservas y organizar mejor las respuestas a las consultas.",
+    "challenge": "Mostrar la calidad del servicio y convertir las consultas en citas atendidas.",
+    "audience": "Personas del sector que valoran un buen corte, puntualidad y facilidad para reservar.",
+    "idea": "Publicar trabajos con permiso del cliente y acompañarlos de una invitación clara para consultar horarios y reservar.",
+    "weeks": [
+      "Organizar servicios, precios, horarios y preguntas frecuentes.",
+      "Elegir fotografías de trabajos con autorización de sus protagonistas.",
+      "Probar publicaciones que expliquen cómo reservar una cita.",
+      "Revisar citas nuevas, asistencia y preguntas recibidas."
+    ],
+    "indicator": "Registrar reservas provenientes de publicaciones y citas efectivamente atendidas.",
+    "followup": "Compartir una publicación y revisar sus consultas y reservas, sin divulgar datos de clientes.",
+    "channel": "Revisión semanal de publicaciones y reservas",
+    "investment": 50000,
+    "customers": 8,
+    "ticket": 25000,
+    "cost": 5000,
+    "lesson": "La contribución del ejercicio debe cubrir también los costos fijos; no equivale a la utilidad neta de la barbería."
+  },
+  {
+    "key": "cafeteria",
+    "icon": "☕",
+    "category": "CAFETERÍA",
+    "name": "Evocation Coffee",
+    "voice": "Quiero comunicar mejor la experiencia de tomar café en nuestro negocio. Antes de invertir más en publicidad, necesito revisar qué contenido interesa y cuánto deja una promoción.",
+    "challenge": "Dar a conocer la experiencia del negocio y evaluar el margen de una promoción.",
+    "audience": "Personas que buscan café, una pausa o un espacio para conversar.",
+    "idea": "Mostrar la preparación de una bebida y evaluar una combinación de café y acompañamiento, calculando sus costos.",
+    "weeks": [
+      "Conversar con los clientes sobre sus productos y experiencias preferidas.",
+      "Preparar fotografías y un video breve de una bebida.",
+      "Probar una combinación de productos con su margen calculado.",
+      "Revisar compras atribuidas, comentarios y posibles ajustes."
+    ],
+    "indicator": "Contar compras asociadas a la publicación y calcular su contribución.",
+    "followup": "Compartir qué producto despertó más interés y qué ajuste se probaría después.",
+    "channel": "Conversación de seguimiento entre comerciantes",
+    "investment": 45000,
+    "customers": 15,
+    "ticket": 12000,
+    "cost": 7000,
+    "lesson": "Una oferta puede atraer compradores y aun así requerir ajustes cuando se consideran arriendo, salarios y demás costos fijos."
+  }
+];
+PRACTICE_CASES.forEach(item => {
+  const business = NEGOCIOS[item.key];
+  business.label = item.name;
+  business.title = item.name + ": una idea para probar durante 30 días.";
+  business.problem = item.challenge; business.audience = item.audience; business.value = item.idea;
+  business.weeks = item.weeks; business.metric = item.indicator;
+});
 
 NEGOCIOS.otro = {
   label: "Otro comercio o servicio", category: "COMERCIO LOCAL · EJEMPLO EDUCATIVO", icon: "🏪", css: "business-otro",
@@ -93,6 +197,7 @@ const FASES = [
 const $ = (id) => document.getElementById(id);
 const formatCOP = (number) => new Intl.NumberFormat("es-CO", {style:"currency", currency:"COP", maximumFractionDigits:0}).format(Number.isFinite(number) ? number : 0);
 let negocioActual = "tienda";
+let practiceContext = null;
 let ultimoPlan = "";
 let toastTimer;
 
@@ -231,7 +336,9 @@ $("plan-form").addEventListener("submit", (event) => {
     ? "Presupuesto declarado: $0. Prioriza fotografías propias, canales gratuitos y alianzas; no se requiere pagar anuncios."
     : "Presupuesto máximo declarado: " + formatCOP(budget) + ". Decide con el comerciante qué gasto es viable después de revisar sus costos. No es obligatorio gastar el total.";
   const record = activeWorkshopId ? workshopRecords[activeWorkshopId] : null;
-  const followup = record && record.agreement && record.channel && record.review
+  const followup = practiceContext
+    ? "Seguimiento propuesto: " + practiceContext.followup + " Canal de pr\u00e1ctica: " + practiceContext.channel + ". Revisi\u00f3n al cierre de cada semana."
+    : record && record.agreement && record.channel && record.review
     ? "Seguimiento: " + record.agreement + ". Canal: " + record.channel + ". Fecha acordada: " + displayDate(record.review) + "."
     : "Seguimiento: acuerda con el grupo qué avance compartir, la fecha y el canal; regístralo en la ficha del encuentro.";
   $("result-title").textContent = "Plan de " + company;
@@ -240,14 +347,14 @@ $("plan-form").addEventListener("submit", (event) => {
   actions.forEach(action => { const li = document.createElement("li"); li.textContent = action; $("result-actions").append(li); });
   $("result-budget").textContent = investmentText;
   ultimoPlan = [
-    "EMPRENDIMIENTOS DEL BARRIO ARMENIA · PLAN DE 30 DÍAS", "",
+    (practiceContext ? "ESCENARIO DE PRÁCTICA · " : "") + "EMPRENDIMIENTOS DEL BARRIO ARMENIA · PLAN DE 30 DÍAS", "",
     "Negocio o alias: " + company, "Tipo: " + d.label, "Objetivo: " + objective.title,
-    "Reto: " + (challenge || "Por precisar con el comerciante"), "Clientes: " + (audience || "Por precisar"),
-    "Idea construida con el grupo: " + (idea || "Pendiente de acordar"),
-    "Meta e indicador: " + (indicator || "Por precisar"),
+    "Reto: " + (challenge || "Identificar el principal reto del negocio"), "Clientes: " + (audience || "Describir a quienes compran en el negocio"),
+    "Idea para trabajar con el grupo: " + (idea || "Elegir una acción viable"),
+    "Meta e indicador: " + (indicator || "Registrar consultas y pedidos atribuibles"),
     "Tiempo semanal: " + time + " hora(s)", investmentText, "",
     ...actions.map((action, i) => (i + 1) + ". " + action), "", followup, "",
-    "Guía educativa: las acciones y los resultados deben validarse con el negocio. Este documento no certifica asistencia."
+    "Guía educativa: adapta las acciones a las condiciones y los costos de tu negocio."
   ].join("\n");
   if (record) {
     record.plan = ultimoPlan;
@@ -437,7 +544,7 @@ function emptyWorkshopRecord() {
   return { business: "", type: "tienda", challenge: "", audience: "", idea: "", agreement: "", channel: "", review: "", consent: false, plan: "", planInputs: null, calculation: null };
 }
 function displayDate(value) {
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(value || "")) return "Por confirmar";
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value || "")) return "Fecha elegida por el participante";
   const [year, month, day] = value.split("-");
   return day + "/" + month + "/" + year;
 }
@@ -467,7 +574,8 @@ function updateWorkshopSteps() {
     ["workshop-followup", "Acuerdo de seguimiento", !!(record.agreement && record.channel && record.review)]
   ];
   checks.forEach(([id, label, complete]) => {
-    $(id).textContent = label + (complete ? ": guardado en esta ficha" : ": pendiente");
+    const prompts = { "workshop-diagnostic": "Conoce tu negocio", "workshop-plan": "Elige tus acciones", "workshop-calculation": "Explora los números", "workshop-followup": "Comparte tus avances" };
+    $(id).textContent = label + (complete ? " · Guardado en esta ficha" : " · " + prompts[id]);
     $(id).classList.toggle("done", complete);
   });
 }
@@ -493,6 +601,8 @@ function saveWorkshopDraft() {
   return saved;
 }
 function fillPlannerFromWorkshop(record, id) {
+  practiceContext = null;
+  $("save-calculation").textContent = "Guardar práctica en mi ficha";
   activeWorkshopId = id;
   showBusiness(Object.hasOwn(NEGOCIOS, record.type) ? record.type : "otro");
   $("plan-name").value = record.business || id;
@@ -506,6 +616,8 @@ function fillPlannerFromWorkshop(record, id) {
   $("plan-workshop-note").textContent = "Ficha activa: " + id + ". El plan que generes se guardará aquí. Puedes adaptarlo con el grupo.";
 }
 function loadWorkshopRecord() {
+  practiceContext = null;
+  $("save-calculation").textContent = "Guardar práctica en mi ficha";
   const id = $("community-participant").value, record = workshopRecords[id];
   Object.entries(WORKSHOP_FIELDS).forEach(([key, field]) => { $(field).value = record[key]; });
   $("community-consent").checked = record.consent;
@@ -568,6 +680,21 @@ $("community-form").addEventListener("submit", event => {
   $("plan-name").focus({ preventScroll: true });
 });
 $("save-calculation").addEventListener("click", () => {
+  if (practiceContext && !activeWorkshopId) {
+    const exercise = readCalculation();
+    if (!exercise) { aviso("Revisa los datos de la calculadora."); return; }
+    downloadText("ejercicio-" + practiceContext.key + "-barrio-armenia.txt", [
+      "ESCENARIO DE PRÁCTICA · CIFRAS ILUSTRATIVAS", practiceContext.name, "",
+      "Inversión: " + formatCOP(exercise.investment), "Clientes atribuibles: " + exercise.customers,
+      "Venta por cliente: " + formatCOP(exercise.ticket), "Costo variable por venta: " + formatCOP(exercise.cost),
+      "Ingresos atribuidos: " + formatCOP(exercise.revenue),
+      "Contribución después de campaña: " + formatCOP(exercise.contribution), "",
+      "Faltan los demás costos fijos e impuestos para calcular la utilidad neta.",
+      "Estas cifras son un ejercicio educativo, no ventas ni resultados comprobados de un negocio."
+    ].join("\n"));
+    $("calculation-status").textContent = "Ejercicio descargado con sus cifras ilustrativas.";
+    return;
+  }
   if (!activeWorkshopId || !hasDiagnostic(workshopRecords[activeWorkshopId])) {
     aviso("Guarda primero tu diagnóstico en Comunidad."); return;
   }
@@ -592,18 +719,18 @@ $("community-download").addEventListener("click", () => {
     "Costo de adquisición: " + (exercise.cac === null ? "No calculable sin clientes" : formatCOP(exercise.cac)),
     "Contribución tras costos variables y campaña: " + formatCOP(exercise.contribution),
     "Faltan costos fijos e impuestos; esta práctica no acredita resultados reales."
-  ].join("\n") : "Pendiente de guardar la práctica con los datos del negocio.";
+  ].join("\n") : "Usa la calculadora y guarda los valores de tu ejercicio.";
   const text = [
     "EMPRENDIMIENTOS DEL BARRIO ARMENIA · FICHA PARTICIPATIVA", "",
-    "Comunidad: " + CONFIG.NOMBRE_COMUNIDAD, "Fecha del taller: " + displayDate(CONFIG.FECHA_TALLER),
+    "Comunidad: " + CONFIG.NOMBRE_COMUNIDAD, ...(CONFIG.FECHA_TALLER ? ["Fecha del taller: " + displayDate(CONFIG.FECHA_TALLER)] : []),
     "Código: " + id, "Negocio o alias: " + (record.business || id),
-    "Autorización declarada para compartir esta ficha: " + (record.consent ? "Sí. Verificar y conservar el permiso y su alcance." : "Pendiente. Uso interno; no publicar datos identificables."),
-    "", "DIAGNÓSTICO", "Reto: " + (record.challenge || "Pendiente"), "Clientes: " + (record.audience || "Pendiente"),
-    "Idea construida con el grupo: " + (record.idea || "Pendiente"), "",
-    "PLAN DE 30 DÍAS", record.plan || "Pendiente de generar.", "", "PRÁCTICA DE LA CALCULADORA", exerciseText, "",
-    "ACUERDO DE SEGUIMIENTO", "Avance a compartir: " + (record.agreement || "Pendiente"),
-    "Canal acordado: " + (record.channel || "Pendiente"), "Fecha de revisión: " + displayDate(record.review), "",
-    "La ficha documenta información ingresada; no certifica asistencia ni realización del taller."
+    "Autorización declarada para compartir esta ficha: " + (record.consent ? "Sí. Verificar y conservar el permiso y su alcance." : "Uso personal de la ficha. No habilitada para publicación de datos identificables."),
+    "", "DIAGNÓSTICO", "Reto: " + (record.challenge || "Describe el reto del negocio"), "Clientes: " + (record.audience || "Identifica a sus clientes"),
+    "Idea construida con el grupo: " + (record.idea || "Elige una idea para probar"), "",
+    "PLAN DE 30 DÍAS", record.plan || "Crea tu ruta con el planificador.", "", "PRÁCTICA DE LA CALCULADORA", exerciseText, "",
+    "ACUERDO DE SEGUIMIENTO", "Avance a compartir: " + (record.agreement || "Elige un avance para compartir"),
+    "Canal acordado: " + (record.channel || "Elige el canal con tu grupo"), "Fecha de revisión: " + displayDate(record.review), "",
+    "Conserva esta ficha para revisar las acciones y compartir tus avances."
   ].join("\n");
   downloadText("ficha-barrio-armenia-" + id + ".txt", text);
 });
@@ -619,19 +746,36 @@ $("community-clear").addEventListener("click", () => {
   aviso(saved ? "Se borraron los datos de esta ficha." : "Se borró la ficha en memoria; el navegador no permite confirmar el borrado guardado.");
 });
 $("community-name").textContent = CONFIG.NOMBRE_COMUNIDAD;
-$("community-date").textContent = displayDate(CONFIG.FECHA_TALLER);
-const authorizedCases = CONFIG.CASOS_AUTORIZADOS.filter(item => item && item.autorizado === true && ["nombre", "reto", "clientes", "idea"].every(key => typeof item[key] === "string" && item[key].trim()));
-if (authorizedCases.length) {
-  const container = $("community-cases"); container.replaceChildren();
-  authorizedCases.forEach(item => {
-    const card = document.createElement("article"); card.className = "community-case";
-    const title = document.createElement("h4"); title.textContent = item.nombre; card.append(title);
-    [["reto", "Reto identificado"], ["clientes", "Sus clientes"], ["idea", "Idea construida con la comunidad"]].forEach(([key, label]) => {
-      const paragraph = document.createElement("p"), strong = document.createElement("strong");
-      strong.textContent = label; paragraph.append(strong, document.createTextNode(item[key])); card.append(paragraph);
-    });
-    container.append(card);
-  });
-}
 loadWorkshopRecord();
+
+function loadPracticeCase(key) {
+  const item = PRACTICE_CASES.find(candidate => candidate.key === key);
+  if (!item) return;
+  activeWorkshopId = null;
+  practiceContext = item;
+  ultimoPlan = ""; $("plan-result").hidden = true;
+  showBusiness(key);
+  $("plan-name").value = item.name;
+  $("plan-challenge").value = item.challenge;
+  $("plan-audience").value = item.audience;
+  $("plan-idea").value = item.idea;
+  $("plan-indicator").value = item.indicator;
+  $("plan-budget").value = item.investment;
+  $("plan-time").value = "2";
+  $("plan-goal").value = "clientes";
+  $("plan-workshop-note").textContent = "Escenario de práctica: " + item.name + ". Personaliza las acciones y genera tu plan con estas cifras ilustrativas.";
+  ["calc-investment", "calc-customers", "calc-ticket", "calc-cost"].forEach((id, i) => {
+    $(id).value = [item.investment, item.customers, item.ticket, item.cost][i];
+  });
+  recalc();
+  $("save-calculation").textContent = "Descargar este ejercicio";
+  $("calculation-status").textContent = "Cifras ilustrativas del escenario de " + item.name + ". Puedes modificarlas para explorar otras decisiones.";
+  document.querySelectorAll(".scenario-card").forEach(card => card.classList.toggle("is-selected", card.dataset.case === key));
+  $("planificador").scrollIntoView({ behavior: "smooth", block: "start" });
+  $("plan-name").focus({ preventScroll: true });
+  aviso("Escenario cargado en el planificador y la calculadora.");
+}
+document.querySelectorAll("[data-scenario]").forEach(button => {
+  button.addEventListener("click", () => loadPracticeCase(button.dataset.scenario));
+});
 
